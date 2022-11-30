@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Grosarray</title>
+</head>
+
+<style>
+    #logo {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<body style=" background-color: #D2C9A6;">
+
+    <div id="logo">
+        <img src="https://i.postimg.cc/1X6qn6Ld/lo-go.png" style="display: flex; justify-content:center;">
+    </div>
+    <div>
+        <p style="color: white; text-align:center;">Hold the barcode within the frame to scan your receipt</p>
+        <div id="qr-reader" style="width:500px; margin: auto; font-style: italic;"></div>
+        <div id="qr-reader-results"></div>
+    </div>
+
+</body>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+<script>
+
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+
+
+    function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText !== lastResult) {
+            ++countResults;
+            lastResult = decodedText;
+            // Handle on success condition with the decoded message.
+            alert("YOUR ITEM(S) HAS/HAVE BEEN ADDED TO YOUR INVENTORY");
+        }
+    }
+
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+
+
+</script>
+
+</html>
